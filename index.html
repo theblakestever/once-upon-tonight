@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Once Upon Tonight — A new bedtime story every night</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:     #1a1410;
+    --ink2:    #4a3f35;
+    --ink3:    #8a7a6e;
+    --cream:   #faf6f0;
+    --warm:    #f5ede0;
+    --gold:    #c9922a;
+    --gold2:   #e8b84b;
+    --rust:    #8b3a1a;
+    --night:   #0f0c1a;
+    --night2:  #1c1630;
+    --night3:  #2d2548;
+    --star:    #f0d080;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--night);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── Stars background ── */
+  .stars {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background:
+      radial-gradient(1px 1px at 10% 15%, rgba(240,208,128,0.8) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(240,208,128,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 40% 8%, rgba(240,208,128,0.9) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 25%, rgba(240,208,128,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 12%, rgba(240,208,128,0.7) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 82% 35%, rgba(240,208,128,0.8) 0%, transparent 100%),
+      radial-gradient(1px 1px at 92% 18%, rgba(240,208,128,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 60%, rgba(240,208,128,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 70%, rgba(240,208,128,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 55%, rgba(240,208,128,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 78% 65%, rgba(240,208,128,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 75%, rgba(240,208,128,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5% 85%, rgba(240,208,128,0.6) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 45% 88%, rgba(240,208,128,0.8) 0%, transparent 100%),
+      radial-gradient(1px 1px at 95% 90%, rgba(240,208,128,0.5) 0%, transparent 100%);
+  }
+
+  /* ── Nav ── */
+  nav {
+    position: relative; z-index: 10;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 3rem;
+    border-bottom: 1px solid rgba(240,208,128,0.1);
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--star);
+    letter-spacing: 0.02em;
+  }
+  .nav-cta {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--star);
+    text-decoration: none;
+    border: 1px solid rgba(240,208,128,0.3);
+    padding: 0.5rem 1.25rem;
+    border-radius: 2rem;
+    transition: all 0.2s;
+  }
+  .nav-cta:hover { background: rgba(240,208,128,0.1); border-color: var(--star); }
+
+  /* ── Hero ── */
+  .hero {
+    position: relative; z-index: 1;
+    min-height: 90vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+  }
+  .hero-moon {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fef4c0, #f0d080 40%, #c9922a 80%);
+    box-shadow: 0 0 60px rgba(240,208,128,0.3), 0 0 120px rgba(201,146,42,0.15);
+    margin-bottom: 2.5rem;
+    animation: moonpulse 4s ease-in-out infinite;
+  }
+  @keyframes moonpulse {
+    0%, 100% { box-shadow: 0 0 60px rgba(240,208,128,0.3), 0 0 120px rgba(201,146,42,0.15); }
+    50% { box-shadow: 0 0 80px rgba(240,208,128,0.45), 0 0 160px rgba(201,146,42,0.25); }
+  }
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold2);
+    margin-bottom: 1.25rem;
+    opacity: 0;
+    animation: fadein 0.8s 0.3s forwards;
+  }
+  .hero-h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--cream);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadein 0.8s 0.5s forwards;
+  }
+  .hero-h1 em { font-style: italic; color: var(--star); }
+  .hero-sub {
+    font-family: 'Lora', serif;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    font-style: italic;
+    color: rgba(250,246,240,0.7);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadein 0.8s 0.7s forwards;
+  }
+  .hero-actions {
+    display: flex; flex-direction: column; align-items: center; gap: 1rem;
+    opacity: 0;
+    animation: fadein 0.8s 0.9s forwards;
+  }
+  .btn-primary {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--gold), var(--gold2));
+    color: var(--night);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    padding: 1rem 2.5rem;
+    border-radius: 3rem;
+    text-decoration: none;
+    border: none; cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 24px rgba(201,146,42,0.35);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(201,146,42,0.5); }
+  .hero-price {
+    font-size: 0.8rem;
+    color: rgba(250,246,240,0.45);
+    letter-spacing: 0.05em;
+  }
+  @keyframes fadein { to { opacity: 1; } }
+
+  /* ── How it works ── */
+  .section {
+    position: relative; z-index: 1;
+    padding: 6rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold2);
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 400;
+    text-align: center;
+    color: var(--cream);
+    margin-bottom: 4rem;
+    line-height: 1.2;
+  }
+  .section-title em { font-style: italic; color: var(--star); }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+  }
+  .step {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(240,208,128,0.1);
+    border-radius: 1rem;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: border-color 0.3s;
+  }
+  .step:hover { border-color: rgba(240,208,128,0.3); }
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-style: italic;
+    color: rgba(240,208,128,0.2);
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .step-title {
+    font-family: 'Lora', serif;
+    font-size: 1.05rem;
+    color: var(--cream);
+    margin-bottom: 0.75rem;
+  }
+  .step-body {
+    font-size: 0.875rem;
+    color: rgba(250,246,240,0.55);
+    line-height: 1.7;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    position: relative; z-index: 1;
+    text-align: center;
+    padding: 1rem 0;
+  }
+  .divider-line {
+    width: 60px; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(240,208,128,0.4), transparent);
+    margin: 0 auto;
+  }
+
+  /* ── Sample story ── */
+  .story-section {
+    position: relative; z-index: 1;
+    padding: 4rem 2rem 6rem;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .story-card {
+    background: rgba(250,246,240,0.04);
+    border: 1px solid rgba(240,208,128,0.15);
+    border-radius: 1.25rem;
+    overflow: hidden;
+  }
+  .story-header {
+    background: rgba(240,208,128,0.07);
+    border-bottom: 1px solid rgba(240,208,128,0.12);
+    padding: 1.25rem 1.75rem;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 0.5rem;
+  }
+  .story-header-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold2);
+  }
+  .story-chips { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .chip {
+    font-size: 0.7rem;
+    color: rgba(250,246,240,0.5);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 2rem;
+    padding: 0.25rem 0.75rem;
+  }
+  .story-body {
+    padding: 2rem 1.75rem;
+    font-family: 'Lora', serif;
+    font-size: 0.975rem;
+    line-height: 1.85;
+    color: rgba(250,246,240,0.82);
+    max-height: 380px;
+    overflow: hidden;
+    position: relative;
+  }
+  .story-body p { margin-bottom: 1em; }
+  .story-body em { font-style: italic; }
+  .story-fade {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, transparent, rgba(15,12,26,0.97));
+    display: flex; align-items: flex-end; justify-content: center;
+    padding-bottom: 1.25rem;
+  }
+  .story-toggle {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--gold2);
+    background: rgba(240,208,128,0.08);
+    border: 1px solid rgba(240,208,128,0.2);
+    border-radius: 2rem;
+    padding: 0.4rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .story-toggle:hover { background: rgba(240,208,128,0.15); }
+  .story-body.expanded { max-height: none; }
+  .story-body.expanded + .story-fade { display: none; }
+
+  /* ── Pricing ── */
+  .pricing-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(240,208,128,0.2);
+    border-radius: 1.5rem;
+    padding: 3rem 2.5rem;
+    text-align: center;
+    max-width: 420px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+  .pricing-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold2), transparent);
+  }
+  .price-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 400;
+    color: var(--cream);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+  .price-amount sup { font-size: 1.5rem; vertical-align: super; }
+  .price-period {
+    font-size: 0.8rem;
+    color: rgba(250,246,240,0.4);
+    letter-spacing: 0.08em;
+    margin-bottom: 2rem;
+  }
+  .price-features {
+    list-style: none;
+    margin-bottom: 2rem;
+    text-align: left;
+  }
+  .price-features li {
+    font-size: 0.9rem;
+    color: rgba(250,246,240,0.7);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .price-features li::before {
+    content: '✦';
+    color: var(--gold2);
+    font-size: 0.6rem;
+    flex-shrink: 0;
+  }
+  .price-note {
+    font-size: 0.75rem;
+    color: rgba(250,246,240,0.3);
+    margin-top: 1rem;
+  }
+
+  /* ── Footer ── */
+  footer {
+    position: relative; z-index: 1;
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 1px solid rgba(240,208,128,0.08);
+    font-size: 0.8rem;
+    color: rgba(250,246,240,0.25);
+  }
+  footer a { color: rgba(250,246,240,0.35); text-decoration: none; }
+  footer a:hover { color: var(--gold2); }
+
+  @media (max-width: 600px) {
+    nav { padding: 1.25rem 1.5rem; }
+    .section { padding: 4rem 1.25rem; }
+    .story-section { padding: 2rem 1.25rem 4rem; }
+    .pricing-card { padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stars"></div>
+
+<nav>
+  <div class="logo">Once Upon Tonight</div>
+  <a href="#subscribe" class="nav-cta">Start tonight</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-moon"></div>
+  <p class="hero-eyebrow">A new story. Every single night.</p>
+  <h1 class="hero-h1">Bedtime stories written<br><em>just for your child</em></h1>
+  <p class="hero-sub">Every evening at bedtime, your child receives a brand-new story — written around their name, their age, and the things they love most.</p>
+  <div class="hero-actions">
+    <a href="#subscribe" class="btn-primary">Get your first story tonight</a>
+    <span class="hero-price">$9 / month &nbsp;·&nbsp; Cancel anytime</span>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="section">
+  <p class="section-label">How it works</p>
+  <h2 class="section-title">Simple as a <em>good night kiss</em></h2>
+  <div class="steps">
+    <div class="step">
+      <span class="step-num">1</span>
+      <div class="step-title">Tell us about your child</div>
+      <p class="step-body">Their name, age, and three favorite things — a toy, a pet, a food, anything they love.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">2</span>
+      <div class="step-title">We write the story</div>
+      <p class="step-body">Every evening, a unique story is written just for them — starring them, woven with the things they love.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">3</span>
+      <div class="step-title">It arrives at bedtime</div>
+      <p class="step-body">The story lands in your inbox at 6pm. Open it, settle in, and read it together.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="story-section">
+  <p class="section-label" style="text-align:center;margin-bottom:0.75rem;">A sample story</p>
+  <h2 class="section-title" style="margin-bottom:1rem;">Written for <em>Jake, age 6</em></h2>
+  <p style="text-align:center;font-size:0.8rem;color:rgba(250,246,240,0.35);margin-bottom:2rem;letter-spacing:0.04em;">Favorites: trains · his dog Biscuit · mac and cheese</p>
+
+  <div class="story-card">
+    <div class="story-header">
+      <span class="story-header-label">Tonight's story</span>
+      <div class="story-chips">
+        <span class="chip">trains</span>
+        <span class="chip">Biscuit</span>
+        <span class="chip">mac & cheese</span>
+      </div>
+    </div>
+    <div class="story-body" id="story-body">
+      <p>Jake was the kind of boy who noticed things. He noticed when Biscuit's tail wagged faster on walk days. He noticed the way steam curled off a bowl of mac and cheese like it was breathing. And he noticed, every single night, the sound of a distant train rolling through the dark — low and steady, like a lullaby the whole world was humming.</p>
+      <p>Tonight, Jake couldn't sleep. He lay in bed listening, Biscuit warm and heavy against his feet, the blanket tucked up to his chin. He counted the stars he could see from his window — three, then five, then seven — but his mind kept wandering.</p>
+      <p>"Biscuit," he whispered. "Are you awake?"</p>
+      <p>Biscuit lifted one sleepy ear.</p>
+      <p>"I keep thinking about stuff," Jake said. "About tomorrow. About everything."</p>
+      <p>Biscuit shuffled up and rested his chin on Jake's chest, big brown eyes blinking slowly. That helped. Jake closed his eyes and, without meaning to, started to drift — right into the best kind of dream.</p>
+      <p>He was standing at a station he'd never seen before, but it felt familiar the way dreams do, like a place you've always known. The platform was lit with warm golden lanterns. A train sat waiting on the tracks, its engine breathing soft puffs of steam into the night air. It was long and handsome, painted deep blue, with brass fittings that caught the light.</p>
+      <p>Biscuit was there too, sitting beside him in a little conductor's vest, tail sweeping the platform floor. "Ready?" Biscuit asked — because in this dream, of course Biscuit could talk.</p>
+      <p>Jake nodded and climbed aboard. The inside of the train was the coziest place Jake had ever seen. Soft seats, warm light, and on a little fold-down tray in front of him — a bowl of mac and cheese, perfectly golden, steam rising in slow, lazy spirals.</p>
+      <p>The train moved gently, rocking side to side as it rolled through a countryside painted in midnight blues and silvers. Outside the window, fireflies drifted past like sparks. Trees nodded in a slow breeze. Jake ate his mac and cheese. It tasted exactly right — the way it always did when his mom made it on cold evenings, when the whole kitchen smelled like home.</p>
+      <p>Biscuit sat beside him, chin resting on Jake's knee, and every so often Jake would reach down and scratch behind his ears. The train didn't rush. It had nowhere to be. It just rolled on, quiet and steady, through the soft dark world.</p>
+      <p>Other passengers were asleep in their seats — a bear with a scarf, a rabbit clutching a stuffed carrot, a small girl curled beneath a patchwork quilt. Jake watched them and felt his own shoulders drop. His jaw unclenched. The bowl was empty now, warm and done.</p>
+      <p>He leaned against the window. The lanterns dimmed a little. Biscuit exhaled a long, slow breath.</p>
+      <p>And the train rolled on, rocking gently, carrying Jake through the quiet night, all the way home to sleep.</p>
+    </div>
+    <div class="story-fade">
+      <button class="story-toggle" onclick="expandStory()">Read the full story</button>
+    </div>
+  </div>
+  <p style="text-align:center;font-size:0.75rem;color:rgba(250,246,240,0.3);margin-top:1.25rem;">Every story is unique. Your child's will be written just for them.</p>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="section" id="subscribe">
+  <p class="section-label">Pricing</p>
+  <h2 class="section-title">One story. Every night.<br><em>Forever theirs.</em></h2>
+  <div class="pricing-card">
+    <div class="price-amount"><sup>$</sup>9</div>
+    <div class="price-period">per month &nbsp;·&nbsp; cancel anytime</div>
+    <ul class="price-features">
+      <li>A brand-new story every single night</li>
+      <li>Written around your child's name & interests</li>
+      <li>Delivered to your inbox at 6pm</li>
+      <li>Changes as your child grows</li>
+      <li>Cancel anytime, no questions asked</li>
+    </ul>
+    <!-- Replace href with your Stripe Checkout link -->
+    <a href="#" class="btn-primary" style="display:block;text-align:center;">Start your first story tonight</a>
+    <p class="price-note">Secure checkout via Stripe</p>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 Once Upon Tonight &nbsp;·&nbsp; <a href="mailto:chunkypuppysupply@gmail.com">Contact</a></p>
+</footer>
+
+<script>
+function expandStory() {
+  document.getElementById('story-body').classList.add('expanded');
+}
+</script>
+</body>
+</html>
