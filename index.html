@@ -6,6 +6,23 @@
 <title>Once Upon Tonight — A new bedtime story every night</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2037420463515450');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2037420463515450&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -391,7 +408,7 @@
 
 <nav>
   <div class="logo">Once Upon Tonight</div>
-  <a href="https://tally.so/r/kdvVZZ" class="nav-cta">Start tonight</a>
+  <a href="https://tally.so/r/kdvVZZ" onclick="fbq('track', 'Lead');" class="nav-cta">Start tonight</a>
 </nav>
 
 <section class="hero">
@@ -400,7 +417,7 @@
   <h1 class="hero-h1">Bedtime stories written<br><em>just for your child</em></h1>
   <p class="hero-sub">Every evening at bedtime, your child receives a brand-new story — written around their name, their age, and the things they love most.</p>
   <div class="hero-actions">
-    <a href="https://tally.so/r/kdvVZZ" class="btn-primary">Get your first story tonight</a>
+    <a href="https://tally.so/r/kdvVZZ" onclick="fbq('track', 'Lead');" class="btn-primary">Get your first story tonight</a>
     <span class="hero-price">$9 / month &nbsp;·&nbsp; Cancel anytime</span>
   </div>
 </section>
